@@ -1,0 +1,202 @@
+*{
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	
+}
+body {
+    background-color: #EFF7FE;
+}
+
+li {
+    padding: 1.3em 3em;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #fff; 
+    background-color: #001f3f; 
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    position: fixed;
+    top: 20px; 
+    right: 20px; 
+  }
+  
+  li:hover {
+    background-color: #e1842d;
+    box-shadow: 0px 15px 20px rgba(240, 132, 8, 0.4);
+    color: #fff;
+    transform: translateY(-7px);
+  }
+  
+  li:active {
+    transform: translateY(-1px);
+  }
+
+.texto {
+    position: absolute;
+    top: 50%;
+    left: 10%; /* Ajusta según sea necesario */
+    transform: translateY(-50%);
+    font-size: 30px; /* Tamaño de fuente */
+    color: #333; /* Color del texto */
+    max-width: 45%; /* Ajusta el ancho máximo */
+    white-space: pre-wrap; /* Permite el salto de línea */
+    text-align: center;
+}
+
+.wave {
+    position: fixed;
+    top: 1%;
+    left: 0.5%;
+    height: 10%;
+    z-index: 0;
+}
+
+.consultar-btn {
+    padding: 1.3em 3em;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+    font-weight: 500;
+    color: #fff;
+    background-color: #001f3f;
+    border: none;
+    border-radius: 45px;
+    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease 0s;
+    cursor: pointer;
+    outline: none;
+    position: absolute;
+    top: 200px;
+    right: 70px;
+    z-index: 1; /* Asegúrate de que esté por encima de otros elementos */
+}
+
+    .consultar-btn:hover {
+        background-color: #e1842d;
+        box-shadow: 0px 15px 20px rgba(240, 132, 8, 0.4);
+        color: #fff;
+        transform: translateY(-7px);
+    }
+
+    .consultar-btn:active {
+        transform: translateY(-1px);
+    }
+
+.imagen-movible {
+    position: absolute;
+    top: 20%;
+    left: 35%;
+    width: 800px;
+    height: auto;
+}
+
+@media only screen and (max-width: 600px) {
+    .imagen-movible {
+        top: 10%;
+        left: 10%;
+        max-width: 80%; /* Cambia el ancho máximo para adaptarse mejor a dispositivos móviles */
+    }
+
+    .texto {
+        font-size: 20px; /* Reducir el tamaño del texto en dispositivos móviles */
+        max-width: 90%; /* Ajustar el ancho máximo para dispositivos móviles */
+        left: 50%;
+        top: 60%;
+        transform: translate(-50%, -50%); /* Centrar horizontalmente en dispositivos móviles */
+    }
+
+    .consultar-btn {
+        top: 80%; /* Ajustar la posición del botón de consulta en dispositivos móviles */
+        right: 50%; /* Centrar horizontalmente en dispositivos móviles */
+        transform: translateX(50%);
+    }
+}
+
+.instagram-icon {
+    position: fixed;
+    bottom: 20px;
+    left: 90%;
+    transform: translateX(-50%);
+    font-size: 20px; /* Tamaño del icono */
+    color: #EFF7FE; /* Color del icono */
+    z-index: 1; /* Asegúrate de que esté por encima de otros elementos */
+    background-color: #001f3f; /* Color de fondo de la bolita */
+    width: 35px; /* Ancho de la bolita */
+    height: 35px; /* Altura de la bolita */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%; /* Hace que la bolita tenga forma de círculo */
+}
+
+.facebook-icon {
+    position: fixed;
+    bottom: 20px;
+    left: 93%;
+    transform: translateX(-50%);
+    font-size: 20px; /* Tamaño del icono */
+    color: #EFF7FE; /* Color del icono */
+    z-index: 1; /* Asegúrate de que esté por encima de otros elementos */
+    background-color: #001f3f; /* Color de fondo de la bolita */
+    width: 35px; /* Ancho de la bolita */
+    height: 35px; /* Altura de la bolita */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%; /* Hace que la bolita tenga forma de círculo */
+}
+
+.whatsapp-icon {
+    position: fixed;
+    bottom: 20px;
+    left: 96%;
+    transform: translateX(-50%);
+    font-size: 20px; /* Tamaño del icono */
+    color: #EFF7FE; /* Color del icono */
+    z-index: 1; /* Asegúrate de que esté por encima de otros elementos */
+    background-color: #001f3f; /* Color de fondo de la bolita */
+    width: 35px; /* Ancho de la bolita */
+    height: 35px; /* Altura de la bolita */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%; /* Hace que la bolita tenga forma de círculo */
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    width: 100px; /* ajusta el tamaño de la imagen según sea necesario */
+    height: auto; /* para mantener la relación de aspecto */
+}
+
+.logo-text {
+    margin-left: 68px; /* Ajusta la distancia horizontal entre la imagen y el texto */
+    margin-top: 20px; /* Ajusta la distancia vertical entre la imagen y el texto */
+    font-size: 18px; /* Tamaño del texto */
+    color: #333; /* Color del texto */
+    display: inline-block; /* Para que el texto flote junto a la imagen */
+    vertical-align: middle; /* Alinea verticalmente el texto con la imagen */
+    font-weight: bold;
+}
+
+
+
+.navbar {
+    background-color: transparent !important;
+}
+
+
+  
+
+  

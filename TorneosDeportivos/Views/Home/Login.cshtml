@@ -1,0 +1,273 @@
+﻿@model TorneosDeportivos.Models.ViewModels.LoginViewModel;
+
+@{
+    Layout = null;
+}
+@{
+    ViewData["Title"] = "Login";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <link rel="stylesheet" type="text/css" href="~/css/Login.css">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+    <img class="wave" src="~/img/logocf.png">
+    <div class="container">
+        <div class="img">
+            <img src="~/img/ejer.png">
+        </div>
+        <div class="login-content">
+            <form asp-action="Login" asp-controller="Home" method="post" id="loginForm">
+                <img src="~/img/user1.png">
+                <h2 class="title">Bienvenido</h2>
+                <br />
+                <span style="color:red">@ViewBag.Error</span>
+                <div class="input-div one">
+                    <div class="i">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="div">
+                        <h5>Usuario</h5>
+                        <input type="text" asp-for="Username" class="input">
+                    </div>
+                </div>
+                <div class="input-div pass">
+                    <div class="i">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="div">
+                        <h5>Contraseña</h5>
+                        <input type="password" asp-for="LaPoderosa" class="input">
+                    </div>
+                </div>
+                
+                <br />
+                
+                <a href="#" onclick="showRecoveryForm()">Recuperar mi contraseña</a>
+                <br />
+                <br />
+                <div class="btn-container">
+                    <button type="button" class="btn-back" onclick="window.location.href = '/Home/Index';">Regresar</button>
+                    <input type="submit" class="btn" value="Iniciar">
+                </div>
+
+            </form>
+            
+
+
+            <form id="recoveryForm" style="display:none;" onsubmit="showCodeForm(event)">
+                <h3>Recuperar Contraseña</h3>
+                <br>
+                <br>
+                <div class="input-div one">
+                    <div class="i">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="div">
+                        <h5>Correo electrónico</h5>
+                        <input type="email" class="input" id="correo" name="correo" required>
+                    </div>
+                </div>
+                <button type="button" class="button-recuperar submit-recuperar" onclick="showCodeForm()">Enviar código</button>
+                <button type="button" class="button-recuperar cancel-recuperar" onclick="hideRecoveryForm()">Cancelar</button>
+            </form>
+
+
+
+            <form id="codeForm" style="display:none;">
+                <input type="hidden" id="usuarioId" name="usuarioId" />
+                <h3>Introducir Código</h3>
+                <br>
+                <br>
+                <div class="input-div one">
+                    <div class="i">
+                        <i class="fas fa-key"></i>
+                    </div>
+                    <div class="div">
+                        <h5>Código de recuperación</h5>
+                        <input type="text" class="input" id="clave" name="clave" required>
+                    </div>
+                </div>
+                <button type="button" class="button-recuperar submit-recuperar" onclick="showResetForm()">Verificar código</button>
+                <button type="button" class="button-recuperar cancel-recuperar" onclick="hideCodeForm()">Cancelar</button>
+            </form>
+
+
+
+            <form id="resetForm" style="display:none;" >
+                <input type="hidden" asp-for="Id"  />
+                <h3>Restablecer Contraseña</h3>
+                <br>
+                <br>
+                <div class="input-div one">
+                    <div class="i">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="div">
+                        <h5>Nueva Contraseña</h5>
+                        <input type="password" asp-for="LaPoderosaNueva" class="input" required>
+                    </div>
+                </div>
+                <div class="input-div one">
+                    <div class="i">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="div">
+                        <h5>Confirmar Nueva Contraseña</h5>
+                        <input type="password" id="LaPoderosaC" name="LaPoderosaC" class="input" required>
+                    </div>
+                </div>
+                <button type="button" class="button-recuperar submit-recuperar" onclick="CompletarRecuperacion()">Restablecer Contraseña</button>
+                <button type="button" class="button-recuperar cancel-recuperar" onclick="hideResetForm()">Cancelar</button>
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript" src="~/js/Login.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        function showRecoveryForm() {
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('recoveryForm').style.display = 'block';
+        }
+        function hideRecoveryForm() {
+            document.getElementById('recoveryForm').style.display = 'none';
+            document.getElementById('loginForm').style.display = 'block';
+        }
+        function showCodeForm() {
+            event.preventDefault();
+            /* Verificar Correo y Enviar Clave */
+            var correoInput = document.getElementById('correo').value;
+
+            if (correoInput !== null && correoInput !== "") {
+                var datos = {
+                    correo: correoInput
+                };
+
+                // Hacer una solicitud AJAX al método EnviarClave en el controlador
+                $.ajax({
+                    url: '/Recuperar/EnviarClave',
+                    type: 'POST',
+                    data: datos, // Envía los datos como un objeto
+                    success: function (response) {
+                        // Verifica si el estado es true
+                        if (response.status === true) {
+                            document.getElementById('recoveryForm').style.display = 'none';
+                            document.getElementById('codeForm').style.display = 'block';
+                            $('#usuarioId').val(response.id);
+                            alert(response.mensaje);
+                        } else {
+                            console.error('Error:', response.mensaje);
+                            alert(response.mensaje);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error en la solicitud AJAX:', status, error);
+                        alert('Error en la solicitud AJAX');
+                    }
+                });
+            }else{
+                alert("Ingresa un correo válido");
+            }
+            
+        }
+        function hideCodeForm() {
+            document.getElementById('codeForm').style.display = 'none';
+            document.getElementById('recoveryForm').style.display = 'block';
+        }
+        function showResetForm() {
+            event.preventDefault();
+            /* Verificar Clave */
+            var idInput = document.getElementById('usuarioId').value;
+            var claveInput = document.getElementById('clave').value;
+            if(claveInput !== null){
+                var datos = {
+                    id: idInput,
+                    clave: claveInput
+                };
+
+                // Hacer una solicitud AJAX al método EnviarClave en el controlador
+                $.ajax({
+                    url: '/Recuperar/ComprobarClave',
+                    type: 'POST',
+                    data: datos, // Envía los datos como un objeto
+                    success: function (response) {
+                        // Verifica si el estado es true
+                        if (response.status === true) {
+                            $('#Id').val(response.id);
+                            console.error(response.mensaje);
+                            document.getElementById('codeForm').style.display = 'none';
+                            document.getElementById('resetForm').style.display = 'block';
+                            alert(response.mensaje);
+                        } else {
+                            console.error('Error:', response.mensaje);
+                            alert('Error: '+ response.mensaje);
+                        }
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error en la solicitud AJAX:', status, error);
+                        alert('Error en la solicitud AJAX');
+                    }
+                });
+            }
+            else{
+                alert("No has ingresado la clave");
+            }
+            
+            
+        }
+        function hideResetForm() {
+            document.getElementById('resetForm').style.display = 'none';
+            document.getElementById('codeForm').style.display = 'block';
+        }
+
+        function CompletarRecuperacion() {
+            event.preventDefault();
+            /* Verificar Clave */
+            var id = document.getElementById('Id').value;
+            var laPoderosa = document.getElementById('LaPoderosaNueva').value;
+            var laPoderosaC = document.getElementById('LaPoderosaC').value;
+            if(laPoderosa !== null){
+                if (laPoderosa === laPoderosaC) {
+                    var datos = {
+                        id: id,
+                        laPoderosa: laPoderosa
+                    };
+                    $.ajax({
+                        url: '/Recuperar/NuevaContraseña',
+                        type: 'POST',
+                        data: datos, // Envía los datos como un objeto
+                        success: function (response) {
+                            // Verifica si el estado es true
+                            if (response.status === true) {
+                                document.getElementById('resetForm').style.display = 'none';
+                                document.getElementById('loginForm').style.display = 'block';
+                                alert(response.mensaje);
+                            } else {
+                                console.error('Error: ', response.mensaje);
+                                alert('Error: '+ response.mensaje);
+                            }
+                        },
+                        error: function (xhr, status, error) {
+                            console.error('Error en la solicitud AJAX:', status, error);
+                            alert('Error en la solicitud AJAX');
+                        }
+                    });
+                }
+                else {
+                    alert("Las contraseñas no son iguales");
+                }
+            }else{
+                alert("Has dejado valores vacíos");
+            }
+            
+            
+        }
+    </script>
+</body>
+</html>
+

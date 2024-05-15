@@ -1,0 +1,89 @@
+﻿@using System.Security.Claims;
+@{
+    ViewData["Title"] = "Encargado";
+}
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menú lateral</title>
+
+    <link rel="stylesheet" href="~/css/usuarios.css">
+
+    <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
+</head>
+<body id="body">
+
+    <header>
+        <div class="icon__menu">
+            <i class="fas fa-bars" id="btn_open"></i>
+        </div>
+    </header>
+
+    <div class="menu__side" id="menu_side">
+
+        <div class="name__page">
+            <i class="fa-solid fa-user"></i>
+            <h4>@User.FindFirstValue(ClaimTypes.Name)</h4>
+        </div>
+
+        <div class="options__menu">
+            <a href="#" class="" onclick="showContent('Torneos')">
+                <div class="option">
+                    <i class="fa-solid fa-trophy"></i>
+                    <h4>Torneos</h4>
+                </div>
+            </a>
+
+            <a href="#">
+                <div class="option" onclick="showContent('Arbitros')">
+                    <i class="fa-solid fa-user-group"></i>
+                    <h4>Arbitros</h4>
+                </div>
+            </a>
+
+            <a href="#">
+                <div class="option" onclick="showContent('Lugares')">
+                    <i class="fa-solid fa-location-arrow"></i>
+                    <h4>Lugares</h4>
+                </div>
+            </a>
+
+            <a href="#">
+                <div class="option" onclick="showContent('Partidos')">
+                    <i class="fa-solid fa-gamepad"></i>
+                    <h4>Partidos</h4>
+                </div>
+            </a>
+
+            <a href="#">
+                <div class="option" onclick="showContent('Resultados')">
+                    <i class="fa-solid fa-file-export"></i>
+                    <h4>Resultados</h4>
+                </div>
+            </a>
+
+            <a asp-controller="Home" asp-action="CerrarSesion">
+                <div class="option">
+                    <i class="fa-solid fa-right-from-bracket" title="Cursos"></i>
+                    <h4>Cerrar Sesion</h4>
+                </div>
+            </a>
+
+        </div>
+
+    </div>
+
+    <main id="main_content">
+        <h1>Bienvenido Encargado</h1>
+        <p>Selecciona una opción del menú lateral para ver su contenido aquí.</p>
+    </main>
+
+    <script src="~/js/usuarios.js"></script>
+</body>
+</html>

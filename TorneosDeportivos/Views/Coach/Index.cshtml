@@ -1,0 +1,110 @@
+﻿@using System.Security.Claims;
+@{
+    ViewData["Title"] = "Administrador";
+}
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="~/css/AdminIndex.css">
+
+    <script src="https://kit.fontawesome.com/41bcea2ae3.js" crossorigin="anonymous"></script>
+</head>
+<body id="body">
+
+    <header>
+        <div class="icon__menu">
+            <i class="fas fa-bars" id="btn_open"></i>
+        </div>
+    </header>
+
+    <div class="menu__side" id="menu_side">
+
+        <div class="name__page">
+            <i class="fa-solid fa-user"></i>
+            <h4>@User.FindFirstValue(ClaimTypes.Name)</h4>
+        </div>
+
+        <div class="options__menu">
+            <a href="#" class="" onclick="showContent('usuarios')">
+                <div class="option">
+                    <i class="fa-solid fa-users"></i>
+                    <h4>Usuarios</h4>
+                </div>
+            </a>
+
+            <a href="#" class="" onclick="showContent('Encargados')">
+                <div class="option">
+                    <i class="fa-solid fa-user-group"></i>
+                    <h4>Encargados</h4>
+                </div>
+            </a>
+
+
+            <a href="#">
+                <div class="option" onclick="showContent('Arbitros')">
+                    <i class="fa-solid fa-user-group"></i>
+                    <h4>Arbitros</h4>
+                </div>
+            </a>
+
+            <a href="#">
+                <div class="option" onclick="showContent('Coachs')">
+                    <i class="fa-solid fa-shirt"></i>
+                    <h4>Coachs</h4>
+                </div>
+            </a>
+
+            <a href="#">
+                <div class="option" onclick="showContent('Canchas')">
+                    <i class="fa-solid fa-location-arrow"></i>
+                    <h4>Canchas</h4>
+                </div>
+            </a>
+
+            <a href="#">
+                <div class="option" onclick="showContent('Contadores')">
+                    <i class="fa-solid fa-comment-dollar"></i>
+                    <h4>Contadores</h4>
+                </div>
+            </a>
+
+            <a href="#">
+                <div class="option" onclick="showContent('Torneos')">
+                    <i class="fa-solid fa-trophy"></i>
+                    <h4>Torneos</h4>
+                </div>
+            </a>
+
+            <a href="#">
+                <div class="option" onclick="showContent('Equipos')">
+                    <i class="fa-solid fa-users"></i>
+                    <h4>Equipos</h4>
+                </div>
+            </a>
+
+            <a asp-action="CerrarSesion" asp-controller="Home">
+                <div class="option">
+                    <i class="fa-solid fa-right-from-bracket" title="Cursos"></i>
+                    <h4>Cerrar Sesion</h4>
+                </div>
+            </a>
+
+        </div>
+
+    </div>
+
+    <main id="main_content">
+        <h1>Bienvenido Coach</h1>
+        <p>Selecciona una opción del menú lateral para ver su contenido aquí.</p>
+    </main>
+
+    <script src="~/js/AdminIndex.js"></script>
+</body>
+</html>
